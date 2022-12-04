@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<Product>
+
+<div class="text-center">
+    <table class="table">
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>
+                    <a asp-action="Edit" asp-route-Id="@product.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-Id="@product.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @if (ViewContext.HttpContext.User.IsInRole("manager") || ViewContext.HttpContext.User.IsInRole("admin"))
+        {
+
+                <form asp-controller="Home" asp-action="AddProduct" method="post">
+                    <input type="text" class="form-control" placeholder="Name" name="Name" />
+                <input type="text" class="form-control" placeholder="Product Description" name="Description" />
+                <input type="text" class="form-control" placeholder="Price" name="Price" />
+                <button class="btn btn-dark" type="submit">Create</button>
+            </form>
+        }
+    </div>
+    @*<h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+</div>

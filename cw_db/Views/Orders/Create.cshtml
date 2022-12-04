@@ -1,0 +1,50 @@
+﻿@model cw_db.ViewModels.OrderProductsViewModel;
+@*TODO: Redo view to work like with roles*@
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Order.Address" class="control-label"></label>
+                <input asp-for="Order.Address" class="form-control" />
+                <span asp-validation-for="Order.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.IssueDate" class="control-label"></label>
+                <input asp-for="Order.IssueDate" class="form-control" />
+                <span asp-validation-for="Order.IssueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.CompletionDate" class="control-label"></label>
+                <input asp-for="Order.CompletionDate" class="form-control" />
+                <span asp-validation-for="Order.CompletionDate" class="text-danger"></span>
+            </div>
+            @foreach(var element in Model.Products)
+            {
+                <p>@Html.DisplayFor(m=> element.Name) </p>
+            }
+            <div class="form-group">
+                <a asp-action="AddToOrder" asp-route-id="@Model.Order.Id">Add</a>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

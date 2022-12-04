@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Product>
+
+@{
+
+}
+
+<tbody>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@product.Price</td>
+            <button asp-controller="Orders" asp-action="AddToOrder"></button>
+        </tr>
+    }
+</tbody>
