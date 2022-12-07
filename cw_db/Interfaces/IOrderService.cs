@@ -1,4 +1,6 @@
-﻿namespace cw_db.Interfaces
+﻿using cw_db.Models;
+
+namespace cw_db.Interfaces
 {
     public interface IOrderService
     {
