@@ -19,5 +19,8 @@ namespace cw_db.Models
         public int Rating { get; set; }
 
         public DateTime date { get; set; } = DateTime.Now;
+
+        public string CustomerId { get; set; }
+        public Customer customer { get; set; }
     }
 }

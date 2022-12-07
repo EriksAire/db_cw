@@ -1,7 +1,8 @@
+using cw_db.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace cw_db
+namespace cw_db.Models
 {
     public class Order
     {
@@ -22,5 +23,11 @@ namespace cw_db
         public DateTime CompletionDate { get; set; }
 
         public List<Product>? Products { get; set; }
+
+        public string CustomerId { get; set; }
+        public Customer customer { get; set; }
+
+        public int SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
     }
 }

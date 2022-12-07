@@ -1,7 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace cw_db
+namespace cw_db.Models
 {
     public class Product
     {
