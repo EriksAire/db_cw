@@ -1,72 +1,20 @@
 ﻿@model IEnumerable<Order>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-@*TODO: ADD SEARCH*@
-@*<form asp-controller="Orders" asp-action="Index" method="get">
-    <p>
-
-        <select asp-for="MovieGenre" asp-items="Model.Genres">
-            <option value="">All</option>
-        </select>
-
-        Title: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>*@
-
+<h2>Orders</h2>
 <table class="table">
-    <thead>
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IssueDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompletionDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Products)
-            </th>
+            <td>@item.Address</td>
+            <td>
+                <form asp-action="AddToOrder" asp-route-id="@item.Id"> 
+                    <button type="submit" class="btn btn-sm btn-danger"> Products</button>
+                </form>
+            </td>
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IssueDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompletionDate)
-                </td>
-                @foreach(var product in item.Products)
-                {
-                    <td>
-                        @Html.DisplayFor(modelProduct => product.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelProduct => product.Price)
-                    </td>
-                }
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
+        
+    }
 </table>
+<a asp-action="Create">Add order</a>
+<a asp-action="Products">Product list</a>
+

@@ -1,17 +1,14 @@
-﻿@model IEnumerable<Product>
+﻿@model cw_db.ViewModels.OrderProductsViewModel
 
-@{
-
-}
-
-<tbody>
-    @foreach (var product in Model)
-    {
-        <tr>
-            <td>@product.Name</td>
-            <td>@product.Description</td>
-            <td>@product.Price</td>
-            <button asp-controller="Orders" asp-action="AddToOrder"></button>
-        </tr>
-    }
-</tbody>
+<form asp-action="" method="post"> 
+    <input type="hidden" name="id" value="@Model.Order.Id"/>
+    <div>
+        @foreach (var item in Model.Products)
+        {
+            <input type="checkbox" name="products" value="@item.Name" 
+                @(Model.Order.Products.Contains(item) ? "checked=\"checked\"" : "") /> @item.Name @item.Price <br />
+            
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

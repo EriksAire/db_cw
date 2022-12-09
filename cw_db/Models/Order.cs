@@ -27,6 +27,7 @@ namespace cw_db.Models
         public string CustomerId { get; set; }
         public Customer customer { get; set; }
 
+        [Required]
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
     }

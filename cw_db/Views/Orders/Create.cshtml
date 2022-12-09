@@ -1,50 +1,13 @@
-﻿@model cw_db.ViewModels.OrderProductsViewModel;
-@*TODO: Redo view to work like with roles*@
-@{
-    ViewData["Title"] = "Create";
-}
+﻿@model Order
 
-<h1>Create</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
 
-<h4>Movie</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddOrder">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Order.Address" class="control-label"></label>
-                <input asp-for="Order.Address" class="form-control" />
-                <span asp-validation-for="Order.Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Order.IssueDate" class="control-label"></label>
-                <input asp-for="Order.IssueDate" class="form-control" />
-                <span asp-validation-for="Order.IssueDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Order.CompletionDate" class="control-label"></label>
-                <input asp-for="Order.CompletionDate" class="form-control" />
-                <span asp-validation-for="Order.CompletionDate" class="text-danger"></span>
-            </div>
-            @foreach(var element in Model.Products)
-            {
-                <p>@Html.DisplayFor(m=> element.Name) </p>
-            }
-            <div class="form-group">
-                <a asp-action="AddToOrder" asp-route-id="@Model.Order.Id">Add</a>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="name">New</label>
+        <input name="Address" class="form-control" />
+        <input type = "date" class="form-control" placeholder="DateTime" name="IssueDate" />
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

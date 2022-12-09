@@ -49,8 +49,6 @@ namespace cw_db.Controllers
             order.Supplier = supplier;
             order.SupplierId = supplier.Id;
 
-            Console.WriteLine(user);
-
             order.CustomerId = userId;
             order.customer = user;
             await orderService.Add(order);
@@ -69,12 +67,41 @@ namespace cw_db.Controllers
             return View(order);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddToOrder(int id)
         {
-            var product = await productService.GetAll();
+            var order = await orderService.Get(id);
 
-            return PartialView(product);
+            if (order != null)
+            {
+                var products = await productService.GetAll();
+                var model = new OrderProductsViewModel
+                {
+                    Order = order,
+                    Products = products
+                };
+
+
+                return View(model);
+            }
+            return NotFound();
         }
+        //
+        //[HttpPost]
+        //public async Task<IActionResult> AddToOrder(int id, List<Product> products)
+        //{
+        //    var order = await orderService.Get(id);
+        //
+        //    if(order == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    order.Products = products;
+        //
+        //    await orderService.Edit(id, order);
+        //
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpPost]
         public async Task<IActionResult> GetProductsInOrder(int id)

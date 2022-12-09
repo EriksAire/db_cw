@@ -1,6 +1,7 @@
-﻿namespace cw_db.ViewModels
+﻿using cw_db.Models;
+
+namespace cw_db.ViewModels
 {
-    //TODO: Useslss ATM
     public class OrderProductsViewModel
     {
         public Order Order { get; set; }
