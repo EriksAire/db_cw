@@ -39,7 +39,7 @@
         @if (ViewContext.HttpContext.User.IsInRole("manager") || ViewContext.HttpContext.User.IsInRole("admin"))
         {
 
-                <form asp-controller="Home" asp-action="AddProduct" method="post">
+            <form asp-controller="Home" asp-action="AddProduct" method="post">
                     <input type="text" class="form-control" placeholder="Name" name="Name" />
                 <input type="text" class="form-control" placeholder="Product Description" name="Description" />
                 <input type="text" class="form-control" placeholder="Price" name="Price" />

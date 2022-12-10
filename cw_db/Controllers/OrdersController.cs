@@ -41,6 +41,11 @@ namespace cw_db.Controllers
                 model = unitOfWork.Repo<Order>().Find(s => s.Address.Contains(searchstring));
             }
             var userId = httpContext.HttpContext.User.Identity.Name;
+            if (userId == null)
+            {
+                return View(model);
+            }
+            
             var user = await userManager.FindByEmailAsync(userId);
             var roles = await userManager.GetRolesAsync(user);
             if (roles.Contains("admin") || roles.Contains("manager"))

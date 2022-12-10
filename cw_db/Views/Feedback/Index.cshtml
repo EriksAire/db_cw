@@ -33,13 +33,15 @@
         }
     </table>
     <div>
-
+        @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+        {
                 <form asp-controller="Feedback" asp-action="AddFeedback" method="post">
                 <input type="text" class="form-control" placeholder="Title" name="Title" />
                 <input type="text" class="form-control" placeholder="Content" name="Content" />
                 <input type="text" class="form-control" placeholder="Rating" name="Rating" />
                 <button class="btn btn-dark" type="submit">Create</button>
             </form>
+        }
     </div>
     @*<h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
