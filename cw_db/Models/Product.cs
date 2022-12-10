@@ -29,6 +29,7 @@ namespace cw_db.Models
 
         public List<Order>? Orders { get; set; }
 
+        [StringLength(50)]
         public string Category { get; set; }
     }
 }

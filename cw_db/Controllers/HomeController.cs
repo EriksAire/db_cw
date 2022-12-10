@@ -52,7 +52,7 @@ namespace cw_db.Controllers
         }
 
         [Authorize(Roles = "admin, manager")]
-        [HttpPut("[action]/{id}")]
+        //[HttpPut("[action]/{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             await productService.Delete(id);

@@ -3,18 +3,19 @@
 <form asp-action="AddOrder" method="post">
 <input type="hidden" name="orderId" value="@Model.Id"/>
 <div>
-        <div>@Model.Id</div>
-        <div>@Model.Order.CustomerId</div>
+    <table>
         <div>
             @foreach (var item in Model.Products)
             {
+                <tr>
                 <input type="checkbox" name="productsNames" value="@item.Name" 
                     @(Model.Order.Products.Contains(item) ? "checked=\"checked\"" : "") /> 
-                        <div>$"{@item.Name} - {@item.Price}" </div>
+                        <div>@item.Name - @item.Price </div>
                     <br />
-            
+                </tr>
             }
         </div>
+    </table>
     </div>
         <div>
                 @*<input type="hidden" name="id" value="@Model.Order.Id"/>*@
@@ -23,7 +24,7 @@
                     @foreach (var item in Model.Suppliers)
                     {
                         
-                            <option value="@item.Name">$"{@item.Name} - {@item.Category}" </option>
+                            <option value="@item.Name">@item.Name - @item.Category </option>
                             <br />
                     }
                     </select>
