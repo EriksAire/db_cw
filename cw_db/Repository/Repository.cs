@@ -58,5 +58,10 @@ namespace cw_db.Repository
         {
             return context.Set<T>().Where(predicate);
         }
+
+        public ApplicationDbContext GetContext()
+        {
+            return context;
+        }
     }
 }

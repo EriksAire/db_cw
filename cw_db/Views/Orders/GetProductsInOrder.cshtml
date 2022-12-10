@@ -2,12 +2,16 @@
 
 <h2>Orders</h2>
 <table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+    </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>item.Price</td>
+            <td>@item.Price</td>
             <td>
-                item.Name
+                @item.Name
             </td>
         </tr>
     }

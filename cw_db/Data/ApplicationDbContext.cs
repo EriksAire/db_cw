@@ -1,4 +1,5 @@
 ﻿using cw_db.Models;
+using cw_db.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,7 +31,10 @@ namespace cw_db.Data
                 .WithMany(g => g.feedBacks)
                 .HasForeignKey(s => s.CustomerId);
 
-
+            builder.Entity<Order>()
+                .HasMany(c => c.Products)
+                .WithMany(s => s.Orders)
+                .UsingEntity(j => j.ToTable("OrderProduct"));
 
 
             builder.Entity<Order>()
@@ -44,5 +48,6 @@ namespace cw_db.Data
         public DbSet<Customer> Customers{ get; set; }
         public DbSet<Order> Orders{ get; set; }
         public DbSet<Feedback> Feedbacks{ get; set; }
+        public DbSet<OrderView> OrderViews { get; set; }
     }
 }

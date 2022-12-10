@@ -1,14 +1,33 @@
 ﻿@model cw_db.ViewModels.OrderProductsViewModel
 
-<form asp-action="" method="post"> 
-    <input type="hidden" name="id" value="@Model.Order.Id"/>
-    <div>
-        @foreach (var item in Model.Products)
-        {
-            <input type="checkbox" name="products" value="@item.Name" 
-                @(Model.Order.Products.Contains(item) ? "checked=\"checked\"" : "") /> @item.Name @item.Price <br />
+<form asp-action="AddOrder" method="post">
+<input type="hidden" name="orderId" value="@Model.Id"/>
+<div>
+        <div>@Model.Id</div>
+        <div>@Model.Order.CustomerId</div>
+        <div>
+            @foreach (var item in Model.Products)
+            {
+                <input type="checkbox" name="productsNames" value="@item.Name" 
+                    @(Model.Order.Products.Contains(item) ? "checked=\"checked\"" : "") /> 
+                        <div>$"{@item.Name} - {@item.Price}" </div>
+                    <br />
             
-        }
+            }
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+        <div>
+                @*<input type="hidden" name="id" value="@Model.Order.Id"/>*@
+                <div>
+                    <select name="supplierName">
+                    @foreach (var item in Model.Suppliers)
+                    {
+                        
+                            <option value="@item.Name">$"{@item.Name} - {@item.Category}" </option>
+                            <br />
+                    }
+                    </select>
+                </div>
+        </div>
+<button type="submit" class="btn btn-primary">ADD</button>
 </form>

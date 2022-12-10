@@ -1,20 +1,76 @@
 ﻿@model IEnumerable<Order>
 
 <h2>Orders</h2>
-<table class="table">
-    @foreach (var item in Model)
-    {
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Address:<input type="text" name="searchstring"/>
+            <button class="btn btn-dark" type="submit">Find</button>
+            <a asp-action="Index">Back to full list</a>
+        </p>
+    </div>
+</form>
+@if (ViewContext.HttpContext.User.IsInRole("manager") || ViewContext.HttpContext.User.IsInRole("admin"))
+{
+    <table class="table">
         <tr>
-            <td>@item.Address</td>
-            <td>
-                <form asp-action="AddToOrder" asp-route-id="@item.Id"> 
-                    <button type="submit" class="btn btn-sm btn-danger"> Products</button>
-                </form>
-            </td>
+            <th>@Html.DisplayNameFor(model=>model.Address)</th>
+            <th>@Html.DisplayNameFor(model=>model.IssueDate)</th>
+            <th>@Html.DisplayNameFor(model=>model.CompletionDate)</th>
         </tr>
-        
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Address</td>
+                <td>@item.IssueDate</td>
+                <td>@item.CompletionDate</td>
+                <td>
+                    <form asp-action="GetProductsInOrder" asp-route-id="@item.Id"> 
+                        <button type="submit" class="btn btn-sm btn-danger"> Products</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="SetDoneDate" asp-route-id="@item.Id"> 
+                        <button type="submit" class="btn btn-sm btn-danger"> Delivered</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </table>
+} else
+{
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model=>model.Address)</th>
+            <th>@Html.DisplayNameFor(model=>model.IssueDate)</th>
+            <th>@Html.DisplayNameFor(model=>model.CompletionDate)</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            @if (item.customer != null)
+            {
+                @if (item.customer.UserName == ViewContext.HttpContext.User.Identity.Name)
+                {
+                    <tr>
+                        <td>@item.Address</td>
+                        <td>@item.IssueDate</td>
+                        <td>@item.CompletionDate</td>
+                        <td>
+                            <form asp-action="GetProductsInOrder" asp-route-id="@item.Id"> 
+                                <button type="submit" class="btn btn-sm btn-danger"> Products</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-action="SetDoneDate" asp-route-id="@item.Id"> 
+                                <button type="submit" class="btn btn-sm btn-danger"> Delivered</button>
+                                </form>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+}
 <a asp-action="Create">Add order</a>
-<a asp-action="Products">Product list</a>
 

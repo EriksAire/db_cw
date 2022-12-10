@@ -1,12 +1,10 @@
-using cw_db.Models;
-using System;
+﻿using cw_db.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace cw_db.Models
+namespace cw_db.ViewModels
 {
-    public class Order
+    public class OrderView
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -18,13 +16,6 @@ namespace cw_db.Models
 
         public DateTime? CompletionDate { get; set; }
 
-        public List<Product>? Products { get; set; }  = new List<Product>();
-
         public string CustomerId { get; set; }
-        public Customer customer { get; set; }
-
-        [Required]
-        public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; }
     }
 }

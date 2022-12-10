@@ -10,16 +10,23 @@ namespace cw_db.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService productService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             this.productService = productService;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchstring)
         {
             var model = await productService.GetAll();
+
+            if (!String.IsNullOrEmpty(searchstring))
+            {
+                model = _unitOfWork.Repo<Product>().Find(s => s.Name.Contains(searchstring));
+            }
 
             return View("Index", model);
         }

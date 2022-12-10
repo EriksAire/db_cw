@@ -23,11 +23,12 @@ namespace cw_db.Models
         [DataType(DataType.Currency)]
         public double Price { get; set; }
 
-
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;
 
         public List<Order>? Orders { get; set; }
+
+        public string Category { get; set; }
     }
 }

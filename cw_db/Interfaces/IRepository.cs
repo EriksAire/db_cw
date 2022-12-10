@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using cw_db.Data;
+using System.Linq.Expressions;
 
 namespace cw_db.Interfaces
 {
@@ -21,5 +22,7 @@ namespace cw_db.Interfaces
         void Delete(T item);
 
         Task SaveChangesAsync();
+
+        ApplicationDbContext GetContext();
     }
 }
